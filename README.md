@@ -21,7 +21,5 @@
 | 38            | GPIO20     | (+)       |
 | 39            | GND        | (-)       |
 
-
-
 **_Raspberry Pi 3 B+ Pinout_**
 ![RaspPi3B_Pinout](https://github.com/hibernatusMV/allskycamera/blob/master/raspberrypi_pinout.png "Raspberry Pi 3 B+ Pinout")
