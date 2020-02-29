@@ -24,4 +24,4 @@
 
 
 **_Raspberry Pi 3 B+ Pinout_**
-![RaspPi3B_Pinout](https://github.com/hibernatusMV/allskycamera/blob/master/raspberrypi_pinout.jpg "Raspberry Pi 3 B+ Pinout")
+![RaspPi3B_Pinout](https://github.com/hibernatusMV/allskycamera/blob/master/raspberrypi_pinout.png "Raspberry Pi 3 B+ Pinout")
