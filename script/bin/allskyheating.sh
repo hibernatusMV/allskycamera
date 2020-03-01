@@ -23,22 +23,22 @@ function getStatus {
 status=$( cat /sys/class/gpio/gpio17/value )
 
 if [ $status -eq 0 ] ; then
-  echo "Heizung ist aus"
+  echo "Heating is off"
 else
-  echo "Heizung ist an"
+  echo "Heating is on"
 fi
 }
 
 if [ $# -eq 0 ] ; then
-    echo "Bitte Parameter angeben: $0 on/off/status"
+    echo "Argument missing: $0 on/off/status"
     exit 1
 fi
 
 if [ "$1" = "on" ] ; then
-  echo "Schalte AllSky Heizung ein!"
+  echo "Switching AllSky heating on!"
   switch_on
 elif [ "$1" = "off" ] ; then
-  echo "Schalte AllSky Heizung aus!"
+  echo "Switching AllSky heating off!"
   switch_off
 elif [ "$1" = "status" ] ; then
   getStatus

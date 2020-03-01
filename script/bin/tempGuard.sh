@@ -4,25 +4,25 @@
 max_temp=18
 min_temp=5
 
-cur_temp=$( ./getTemp.sh )
-stat=$( ./allskyheating.sh status )
-t=$(date +%H:%M:%S)
+cur_temp=$( /home/pi/bin/getTemp.sh )
+stat=$( /home/pi/bin/allskyheating.sh status )
+t=$( date +%H:%M:%S )
 
 echo "$t  Temp: $cur_temp -> $stat"
 
 # checking temperature
 if [ $cur_temp -ge $max_temp ] ; then
-  if [ "$stat" == "Heizung ist an" ] ; then
+  if [ "$stat" == "Heating is on" ] ; then
     echo "$t  "
-    ./allskyheating.sh off
+    /home/pi/bin/allskyheating.sh off
     exit 1
   fi
 fi
 
 if [ $cur_temp -lt $min_temp ] ; then
-  if [ "$stat" == "Heizung ist aus" ] ; then
+  if [ "$stat" == "Heating is off" ] ; then
     echo "$t  "
-    ./allskyheating.sh on
+    /home/pi/bin/allskyheating.sh on
     exit 1
   fi
 fi
