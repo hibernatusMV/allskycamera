@@ -23,7 +23,7 @@ def handle(msg):
         os.system("sudo shutdown now")
     elif command == '/reboot':
         bot.sendMessage(chat_id, 'rebooting system!')
-        os.system("shutdown -r now")
+        os.system("sudo reboot")
     elif command == '/temp':
         hdl = subprocess.Popen("/home/pi/bin/getTempDetail.sh", shell=True, stdout=subprocess.PIPE).stdout
         res = hdl.read()
