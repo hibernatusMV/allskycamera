@@ -16,10 +16,27 @@
 | 6             | GND        | (-)       |
 
 **_Activity LED_**
-| RasPi Pin     | Pin        | LED       
+| RasPi Pin     | Pin        | LED       |
 | ------------- |------------|:---------:|
 | 38            | GPIO20     | (+)       |
 | 39            | GND        | (-)       |
+
+
+**_Heater Switch Relay_**
+| RasPi Pin     | Relay      |                 |
+| ------------- |------------|-----------------|
+| 2             | (+)        |                 |
+| 4             | IN         | Relay input     |
+| 9             | COM        | Resistors (GND) |
+| 11            | S          | Signal          |
+| 14            | (-)        | GND             |
+
+**_Temperature Sensor_**
+| RasPi Pin     | DS18B20    |
+| ------------- |------------|
+| 7             | Data       |
+| 17            | 3.3V       |
+| 21            | GND        |
 
 **_Raspberry Pi 3 B+ Pinout_**
 ![RaspPi3B_Pinout](https://github.com/hibernatusMV/allskycamera/blob/master/raspberrypi_pinout.png "Raspberry Pi 3 B+ Pinout")
