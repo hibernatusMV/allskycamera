@@ -44,14 +44,14 @@
 
 ## Raspberry Pi Environment
 **_Shell scripts and cronjobs_**
-1. create two new folder named bin and log in /home/pi/
+1. Create two new folder named bin and log in /home/pi/
 ```bash
 mkdir bin
 mkdir log
 ```
-2. copy shell scripts to the bin directory
-3. edit crontab ``` crontab -e ```
-4. add cronjob ``` */1 * * * * /home/pi/bin/tempGuard.sh >>/home/pi/log/$(date +\%Y\%m\%d)_tempGuard.log 2>&1 ```
+2. Copy shell scripts to the bin directory
+3. Edit crontab ``` crontab -e ```
+4. Add the cronjob ``` */1 * * * * /home/pi/bin/tempGuard.sh >>/home/pi/log/$(date +\%Y\%m\%d)_tempGuard.log 2>&1 ```
 
 **_Installing Telegramm and Telegramm Bot_**
 
