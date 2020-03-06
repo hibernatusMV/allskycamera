@@ -30,8 +30,10 @@
 1. in home directory /home/pi/ create directories bin and log
 ```
 mkdir bin
+mkdir python
 mkdir log
 ```
-2. copy shell scripts to bin directory
-3. edit crontab ``` crontab -e ```
-4. add cronjob ``` */1 * * * * /home/pi/bin/tempGuard.sh >>/home/pi/log/$(date +\%Y\%m\%d)_tempGuard.log 2>&1 ```
+2. copy shell scripts to the bin directory
+3. copy python scripts and subfolder to the python directory
+4. edit crontab ``` crontab -e ```
+5. add cronjob ``` */1 * * * * /home/pi/bin/tempGuard.sh >>/home/pi/log/$(date +\%Y\%m\%d)_tempGuard.log 2>&1 ```
