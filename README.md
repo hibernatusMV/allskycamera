@@ -45,12 +45,43 @@
 ## Raspberry Pi Environment
 **_Shell scripts and cronjobs_**
 1. in home directory /home/pi/ create directories bin and log
-```
+```bash
 mkdir bin
-mkdir python
 mkdir log
 ```
 2. copy shell scripts to the bin directory
-3. copy python scripts and subfolder to the python directory
-4. edit crontab ``` crontab -e ```
-5. add cronjob ``` */1 * * * * /home/pi/bin/tempGuard.sh >>/home/pi/log/$(date +\%Y\%m\%d)_tempGuard.log 2>&1 ```
+3. edit crontab ``` crontab -e ```
+4. add cronjob ``` */1 * * * * /home/pi/bin/tempGuard.sh >>/home/pi/log/$(date +\%Y\%m\%d)_tempGuard.log 2>&1 ```
+
+**_Installing Telegramm and Telegramm Bot_**
+
+1. Follow the link to setup a Telegramm bot :
+[Using Telegram Bot with Raspberry Pi](https://circuitdigest.com/microcontroller-projects/raspberry-pi-telegram-bot) until Step 4.
+
+2. Install telebot to communicate with Telegramm.
+
+```bash
+sudo apt-get install python-pip
+sudo pip install telepot
+```
+
+3. Create a new folder named python in /home/pi/:
+
+```bash
+mkdir python
+```
+
+4. Copy the python scripts and subfolder into the python directory.
+5. Add the service script allskybot.service into /lib/systemd/system/ .
+6. Enable newly added service to start at Pi startup
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable allskybot.service
+sudo systemctl start allskybot.service
+```
+
+7. Check status of the service
+```bash
+sudo systemctl status allskybot.service
+```
