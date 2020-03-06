@@ -7,6 +7,7 @@ import emoji
 import telepot
 import time
 from datetime import datetime
+from datetime import timedelta
 from telepot.loop import MessageLoop
 from telepot.namedtuple import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
 from config.constants import SHELL_SCRIPT_PATH, ALLSKY_IMAGE_PATH
@@ -15,6 +16,14 @@ from config.auth import TOKEN, CHAT_ID
 def init():
     global bot
     bot = telepot.Bot(TOKEN)
+
+def start_menu(bot, chat_id):
+    # define button main menu
+    mainkeyboard = ReplyKeyboardMarkup(keyboard=[
+        #main menu
+        [KeyboardButton(text="Allsky Camera Status")], [KeyboardButton(text="Pi Uptime")], [KeyboardButton(text="Pi Reboot")], [KeyboardButton(text="Pi Shutdown")]
+    ], resize_keyboard=True)
+    bot.sendMessage(chat_id, 'Main Menu', reply_markup = mainkeyboard)
 
 # calling process to shutdown, reboot etc. Pi
 def call_shutdown(option):
@@ -61,23 +70,25 @@ def on_chat_message(msg):
     allskykeyboard = ReplyKeyboardMarkup(keyboard=[
         #/system
         [KeyboardButton(text='Dome Temp.'), KeyboardButton(text='Heater Status'), KeyboardButton(text='Live-View')],
-        [KeyboardButton(text='Heater: ON'), KeyboardButton(text='Heater: OFF')]
+        [KeyboardButton(text='Heater: ON'), KeyboardButton(text='Heater: OFF')],
+        [KeyboardButton(text='Cancel')]
     ], resize_keyboard=True)
     
     # user action input
-    if command == '/uptime':
+    if command == 'Pi Uptime':
         uptime_string = get_uptime()
         bot.sendMessage(chat_id, emoji.emojize(':hourglass_flowing_sand: ' + uptime_string[:-7], use_aliases=True))
-    elif command == '/shutdown':
+    elif command == 'Pi Shutdown':
         bot.sendMessage(chat_id, emoji.emojize('Do you really want to shutdown? :scream:', use_aliases=True), reply_markup = shtdnkeyboard)
-    elif command == '/reboot':
+    elif command == 'Pi Reboot':
         bot.sendMessage(chat_id, emoji.emojize('Do you really want to reboot? :confused:', use_aliases=True), reply_markup = rbootkeyboard)
-    elif command == '/system':
+    elif command == 'Allsky Camera Status':
         bot.sendMessage(chat_id, emoji.emojize(':camera: Allsky Camera Status', use_aliases=True), reply_markup = allskykeyboard)
     
     # button click events
     if command == 'Cancel':
         bot.sendMessage(chat_id, emoji.emojize('aborted. :relaxed:', use_aliases=True), reply_markup = ReplyKeyboardRemove(remove_keyboard=True))
+        start_menu(bot, chat_id)
     elif command == 'Dome Temp.':
         res = get_temp()
         bot.sendMessage(chat_id, res)
@@ -121,6 +132,7 @@ def main():
     
     ip_address = subprocess.check_output("hostname -I | awk '{print $1}'", shell=True).decode('ascii')
     bot.sendMessage(CHAT_ID, emoji.emojize(":rocket: Hello, I\'m online and my IP-Address is " + ip_address, use_aliases=True))
+    start_menu(bot, CHAT_ID)
 
     while 1:
         time.sleep(10)
