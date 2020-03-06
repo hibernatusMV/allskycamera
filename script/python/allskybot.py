@@ -1,3 +1,4 @@
+#!/usr/bin python2.7
 import sys
 import os
 import subprocess
@@ -12,8 +13,8 @@ from config.constants import SHELL_SCRIPT_PATH, ALLSKY_IMAGE_PATH
 from config.auth import TOKEN, CHAT_ID
 
 def init():
-    # initialize Telegramm Bot
-    return telepot.Bot(TOKEN)
+    global bot
+    bot = telepot.Bot(TOKEN)
 
 # calling process to shutdown, reboot etc. Pi
 def call_shutdown(option):
@@ -107,7 +108,7 @@ def wait_for_internet_connection():
             pass
 
 def main():
-    bot = init()
+    init()
     wait_for_internet_connection()
     
     # loop to listen for user input
