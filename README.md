@@ -1,11 +1,11 @@
 # Allsky Camera
 
 ## Hardware
-..Raspberry Pi 3B+
-..LED Red
-..LED Green
-..Temperature sensor DS 18B20
-..Relais EIN Kanal Relaismodul Bord Schild Für PIC AVR DSP ARM https://amzn.to/2vrqiVI
+- Raspberry Pi 3B+
+- LED Red
+- LED Green
+- Temperature sensor DS 18B20
+- Relais EIN Kanal Relaismodul Bord Schild Für PIC AVR DSP ARM https://amzn.to/2vrqiVI
 
 ## Wiring
 **_Power LED_**
