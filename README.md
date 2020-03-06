@@ -44,7 +44,7 @@
 
 ## Raspberry Pi Environment
 **_Shell scripts and cronjobs_**
-1. in home directory /home/pi/ create directories bin and log
+1. create two new folder named bin and log in /home/pi/
 ```bash
 mkdir bin
 mkdir log
