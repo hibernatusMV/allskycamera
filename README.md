@@ -50,7 +50,7 @@ mkdir bin
 mkdir log
 ```
 2. Copy shell scripts to the bin directory
-3. To make the script work, WiringPi has to be installed (normally it is pre-installed). Important for Pi 4 users:
+3. To make the scripts work, WiringPi has to be installed (normally it is pre-installed). Important for Pi 4 users:
    WiringPi has to be 2.52 or later. Check with
    
    ```bash
