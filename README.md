@@ -74,8 +74,10 @@
    ```
    
    to check for the installed version.
-4. Edit crontab ``` crontab -e ```
-5. Add the cronjob ``` */1 * * * * /home/pi/bin/tempGuard.sh >>/home/pi/log/$(date +\%Y\%m\%d)_tempGuard.log 2>&1 ```
+4. Additionally bc has to be installed (if not already installed).
+   Install with ``` sudo apt-get install bc ```
+5. Edit crontab ``` crontab -e ```
+6. Add the cronjob ``` */1 * * * * /home/pi/bin/tempGuard.sh >>/home/pi/log/$(date +\%Y\%m\%d)_tempGuard.log 2>&1 ```
 
 **_Installing Telegramm and Telegramm Bot_**
 
