@@ -45,29 +45,35 @@
 ## Raspberry Pi Environment
 **_Shell scripts and cronjobs_**
 1. Create two new folder named bin and log in /home/pi/
-```bash
-mkdir bin
-mkdir log
-```
+
+   ```bash
+   mkdir bin
+   mkdir log
+   ```
+   
 2. Copy shell scripts to the bin directory
 3. To make the scripts work, WiringPi has to be installed (normally it is pre-installed). Important for Pi 4 users:
    WiringPi has to be 2.52 or later. Check with
    
    ```bash
    gpio -v
-   ```
+   ```   
    
    To upgrade to the latest version do the following:
+   
    ```bash
    cd /tmp
    wget https://project-downloads.drogon.net/wiringpi-latest.deb
    sudo dpkg -i wiringpi-latest.deb
    ```
+   
    After succsessful installation run again
+   
    ```bash
    gpio -v
    ```
-   to check for the installed version.  
+   
+   to check for the installed version.
 4. Edit crontab ``` crontab -e ```
 5. Add the cronjob ``` */1 * * * * /home/pi/bin/tempGuard.sh >>/home/pi/log/$(date +\%Y\%m\%d)_tempGuard.log 2>&1 ```
 
