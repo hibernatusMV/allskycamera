@@ -91,15 +91,16 @@ sudo apt-get install python-pip
 sudo pip install telepot
 ```
 
-3. Create a new folder named python in /home/pi/:
+3. Install emoji library ``` pip install emoji --upgrade ```
+4. Create a new folder named python in /home/pi/:
 
 ```bash
 mkdir python
 ```
 
-4. Copy the python scripts and subfolder into the python directory.
-5. Add the service script allskybot.service into /lib/systemd/system/ .
-6. Enable newly added service to start at Pi startup
+5. Copy the python scripts and subfolder into the python directory.
+6. Copy the service script allskybot.service into /lib/systemd/system/ (copy as root).
+7. Enable newly added service to start at Pi startup
 
 ```bash
 sudo systemctl daemon-reload
@@ -107,7 +108,7 @@ sudo systemctl enable allskybot.service
 sudo systemctl start allskybot.service
 ```
 
-7. Check status of the service
+8. Check status of the service
 ```bash
 sudo systemctl status allskybot.service
 ```
