@@ -67,7 +67,7 @@
    sudo dpkg -i wiringpi-latest.deb
    ```
    
-   After succsessful installation run again
+   After successful installation run again
    
    ```bash
    gpio -v
