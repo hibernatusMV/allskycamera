@@ -1,7 +1,7 @@
 # Allsky Camera
 
 ## Hardware
-- Raspberry Pi 3B+
+- Raspberry Pi 3B+ / 4
 - LED Red
 - LED Green
 - Temperature sensor DS 18B20
@@ -50,8 +50,26 @@ mkdir bin
 mkdir log
 ```
 2. Copy shell scripts to the bin directory
-3. Edit crontab ``` crontab -e ```
-4. Add the cronjob ``` */1 * * * * /home/pi/bin/tempGuard.sh >>/home/pi/log/$(date +\%Y\%m\%d)_tempGuard.log 2>&1 ```
+3. To make the script work, WiringPi has to be installed (normally it is pre-installed). Important for Pi 4 users:
+   WiringPi has to be 2.52 or later. Check with
+   
+   ```bash
+   gpio -v
+   ```
+   
+   To upgrade to the latest version do the following:
+   ```bash
+   cd /tmp
+   wget https://project-downloads.drogon.net/wiringpi-latest.deb
+   sudo dpkg -i wiringpi-latest.deb
+   ```
+   After succsessful installation run again
+   ```bash
+   gpio -v
+   ```
+   to check for the installed version.  
+4. Edit crontab ``` crontab -e ```
+5. Add the cronjob ``` */1 * * * * /home/pi/bin/tempGuard.sh >>/home/pi/log/$(date +\%Y\%m\%d)_tempGuard.log 2>&1 ```
 
 **_Installing Telegramm and Telegramm Bot_**
 
