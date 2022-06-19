@@ -1,0 +1,111 @@
+#!/bin/bash
+
+# Upload settings
+
+	# PROTOCOL determines how the files will be uploaded and is one of:
+	#  "local"	copies to a location on your Pi.
+	#  "ftp"	uploads to an FTP server.
+	#		See the section for ftp PROTOCOL below.
+	#  "ftps"	uploads to an FTP server that supports secure FTP transfer.
+	# 		*** Use "ftps" instead of "ftp" if you can - it's more secure than ftp. ***
+	#		See the section for ftp PROTOCOL below.
+	#  "sftp"	(SSH file transfer) - uploads to an FTP server that supports secure transfer.
+	#		See the section for sftp PROTOCOL below.
+	#  "scp"	(secure copy) - copies to a remote server.
+	#		See the section for scp PROTOCOL below.   NOTE: "scp" PROTOCOL IS NOT IMPLEMENTED YET.
+	#  "S3"		uploads to an Amazon Web Services (AWS) server.
+	#		See the "S3 PROTOCOL only" section below.
+PROTOCOL="sftp"
+
+
+# X*X*X*X*X*X*X*X*X*X*X*X          IMPORTANT NOTE          X*X*X*X*X*X*X*X*X*X*X*X*X*X
+# YOU must create directories on the remote server (or on your Pi if PROTOCOL="local")
+# for the variables below that end in "_DIR" (for example, IMAGE_DIR).
+# X*X*X*X*X*X*X*X*X*X*X*X*X*X*X*X*X*X*X*X*X*X*X*X*X*X*X*X*X*X*X*X*X*X*X*XX*X*X*X*X*X*X
+
+
+# By default, the destination file name is the same as the file being uploaded.
+# The *_DESTINATION_NAME variables below can be set to specify a DIFFERENT destination name.
+# For example, if the file being uploaded is "allsky-20210710.mp4" you may want it
+# called "allsky.mp4" on the remote web server so the name is always the same.
+# In that case, set   VIDEOS_DESTINATION_NAME="allsky.mp4"
+# If you want the destination file name to be the same as what's being uploaded,
+# leave the *_DESTINATION_NAME blank.
+
+# The WEB_*_DIR variables below are optionally used to copy a file to a directory on the Pi
+# IN ADDITION TO being uploaded to a remote server.
+# This is useful, for example, if your Pi's webpage cannot be reached from the Internet and
+# you want an image to exist on the Pi AND on a remote web server.
+# In that case, upload to the remote server using the PROTOCOL variable,
+# and set the corresponding WEB_*_DIR variables to directories on your Pi.
+# For example, for a timelapse, set VIDEOS_DIR to the name of the directory on the
+# remote web server, and set WEB_VIDEOS_DIR to the name of the directory on your Pi,
+# which will usually be in /var/www/html/allsky/videos.
+
+	# The remote directory where the current "image.jpg" file be copied to.
+IMAGE_DIR="/allsky/"
+WEB_IMAGE_DIR=""
+
+	# The remote directory where the timelapse video should be uploaded to.
+	# Some people prefer to put timelapse, keogram, and startrails in separate directories.
+	# If you have the "allsky-website" package installed, use VIDEOS_DIR="/var/www/html/allsky/videos".
+VIDEOS_DIR="/allsky/videos/"
+VIDEOS_DESTINATION_NAME=""
+WEB_VIDEOS_DIR=""
+
+	# The remote directory where the keogram image should be copied to.
+	# If you have the "allsky-website" package installed, use KEOGRAM_DIR="/var/www/html/allsky/keograms".
+KEOGRAM_DIR="/allsky/keograms/"
+KEOGRAM_DESTINATION_NAME=""
+WEB_KEOGRAM_DIR=""
+
+	# The remote directory where the startrails image should be copied to.
+	# If you have the "allsky-website" package installed, use STARTRAILS_DIR="/var/www/html/allsky/startrails".
+STARTRAILS_DIR="/allsky/startrails/"
+STARTRAILS_DESTINATION_NAME=""
+WEB_STARTRAILS_DIR=""
+
+
+############### ftp, ftps, sftp, and scp PROTOCOLS only:
+	# Enter the name of the remote server.  If you don't know it, ask your service provider.
+REMOTE_HOST="192.168.2.125"
+
+	# Enter the username of the login on the remote server.
+REMOTE_USER="allsky"
+
+	# Enter the password of the login on your FTP server.  Does not apply to PROTOCOL=scp.
+REMOTE_PASSWORD="ah1EndWh2@22"
+
+	# If you need special commands executed when connecting to the FTP server enter them here.
+	# See the Wiki (https://github.com/thomasjacquin/allsky/wiki/11-Troubleshooting:-uploads)
+	# for example commands to enter into LFTP_COMMANDS.
+	# If you have more than one command to enter, separate them with semicolons (;).
+	# This setting does not apply to the "scp" PROTOCOL.
+LFTP_COMMANDS=""
+
+
+############### S3 PROTOCOL only:
+	# You will need to install the AWS CLI:
+	#   sudo apt-get install python3-pip
+	#   pip3 install awscli --upgrade --user
+	#   export PATH=/home/pi/.local/bin:$PATH
+	#   aws configure
+	# When prompted, enter a valid access key ID, Secret Access Key, and Default region name,
+	# for example, (e.g. "us-west-2").  Set the Default output format to "json" when prompted.
+
+	# AWS CLI directory where the AWS CLI tools are installed.
+	# If you used a different PATH variable above, change AWS_CLI_DIR to match it.
+AWS_CLI_DIR="/home/pi/.local/bin"
+
+	# Name of S3 Bucket where the files will be uploaded (must be in Default region specified above).
+	# You may want to turn off or limit bucket versioning to avoid consuming lots of
+	# space with multiple versions of the "image.jpg" files.
+S3_BUCKET="allskybucket"
+
+	# S3_ACL is set to private by default.
+	# If you want to serve your uploaded files vis http(s), change S3_ACL to "public-read".  
+	# You will need to ensure the S3 bucket policy is configured to allow public access to
+	# objects with a public-read ACL.
+	# You may need to set a CORS policy in S3 if the files are to be accessed by
+	# Javascript from a different domain.
+S3_ACL="private"
