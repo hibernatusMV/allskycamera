@@ -383,16 +383,6 @@ function DisplaySystem()
 	if ($temp_type == "F" || $temp_type == "B")
 		$display_temperature = $display_temperature . "&nbsp; &nbsp;" . number_format((($temperature * 1.8) + 32), 1, '.', '') . "&deg;F";
 
-	// dome temperature
-	$envtemperature = round(exec("/home/pi/bin/getTempDetail.sh"), 2);
-	if ($envtemperature > 40 || $temperature < 0) {
-		$envtemperature_status = "danger";
-	} elseif ($envtemperature > 30 || $temperature < 5) {
-		$envtemperature_status = "warning";
-	} else {
-		$envtemperature_status = "success";
-	}
-
 	// Optional user-specified data.
 	// TODO: read each file once and populate arrays for "data", "progress", and "button".
 	$udf = get_variable(ALLSKY_CONFIG .'/config.sh', 'WEBUI_DATA_FILES=', '');
@@ -460,8 +450,6 @@ function DisplaySystem()
 									<?php displayProgress("", "CPU Load", "$cpuload%", 0, $cpuload, 100, 90, 75, ""); ?>
 									<tr><td colspan="2" style="height: 5px"></td></tr>
 									<?php displayProgress("", "CPU Temperature", $display_temperature, 0, $temperature, 100, 70, 60, $temperature_status); ?>
-									<tr><td colspan="2" style="height: 5px"></td></tr>
-									<?php displayProgress("", "Dome Temperature", $envtemperature, 0, $envtemperature, 100, 70, 60, $temperature_status); ?>
 									<tr><td colspan="2" style="height: 5px"></td></tr>
 									<?php 
 										if ($dp === -1) {

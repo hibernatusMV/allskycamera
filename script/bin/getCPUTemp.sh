@@ -1,5 +1,9 @@
 #!/bin/bash
 
-temp=$( vcgencmd measure_temp | awk -F 'temp=' '{print $2}' )
-temp=${temp:0:4}
-echo "$temp °C"
+cpu=$( cat /sys/class/thermal/thermal_zone0/temp )
+cpu=$(( cpu/100 )); len=${#cpu};
+out=${cpu:0:$(( len-1 ))};
+frac=${cpu:$(( len-1 )):99}
+cpuT="$out.$frac °C"
+
+echo $cpuT
