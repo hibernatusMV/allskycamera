@@ -54,7 +54,7 @@ def on_chat_message(msg):
     chat_id = msg['chat']['id']
     command = msg['text']
     
-    print 'Got command: %s' % command
+    print('Got command: %s' % command)
     
     # define button menu
     shtdnkeyboard = ReplyKeyboardMarkup(keyboard=[
@@ -124,11 +124,11 @@ def main():
     
     # loop to listen for user input
     MessageLoop(bot, on_chat_message).run_as_thread()
-    print 'I am listening ...'
+    print('I am listening ...')
     
     dt_now = datetime.now()
     starttime = dt_now.strftime("%d.%m.%Y %H:%M:%S")
-    print 'Start time: ', starttime
+    print('Start time: ', starttime)
     
     ip_address = subprocess.check_output("hostname -I | awk '{print $1}'", shell=True).decode('ascii')
     bot.sendMessage(CHAT_ID, emoji.emojize(":rocket: Hello, I\'m online and my IP-Address is " + ip_address, use_aliases=True))
