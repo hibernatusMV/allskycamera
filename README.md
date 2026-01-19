@@ -43,6 +43,12 @@
 
 
 ## Raspberry Pi Environment
+**_Enable 1-Wire_**
+1. Open Raspberry Pi Configuration
+   sudo raspi-config
+2. Enable 1-Wire
+   "Interface Options" -> "1-Wire" -> "Enable"
+   
 **_Shell scripts and cronjobs_**
 1. Create two new folder named bin and log in /home/pi/
 
